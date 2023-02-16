@@ -1,1 +1,52 @@
+@use '../styles/modules/index' as *;
 
+h1,
+h2,
+h3 {
+	margin: 0;
+}
+
+#root {
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-rows: 75px 1fr;
+	font-family: $font;
+}
+
+#header {
+	position: relative;
+	display: flex;
+	background-color: rgb(160, 160, 160);
+	align-items: center;
+	justify-content: space-between;
+	padding: $padding;
+
+	.logo {
+		width: 35px;
+		height: 35px;
+		justify-self: right;
+	}
+
+	.score {
+		position: absolute;
+		right: 50%;
+		transform: translate(50%, 0);
+		width: max-content;
+	}
+}
+
+.board {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
+	justify-content: center;
+	justify-items: center;
+	gap: $gap;
+	margin: $margin;
+}
+
+.card {
+	width: $card-width;
+	height: $card-height;
+	background-color: blue;
+	border-radius: 20px;
+}

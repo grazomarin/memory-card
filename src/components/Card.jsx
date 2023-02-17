@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useResetScore, useIncrementScore } from './ScoresContext';
 
-const Card = () => {
+const Card = (props) => {
 	const [clicked, setClicked] = useState(false);
 	const incrementScore = useIncrementScore();
 	const resetScore = useResetScore();
 
 	const handleClick = () => {
 		if (clicked === true) {
-			console.log('restart game');
+			props.enableGameover();
+			setClicked(false);
 			resetScore();
 			return;
 		}
@@ -16,7 +17,11 @@ const Card = () => {
 		incrementScore();
 	};
 
-	return <div className="card" onClick={handleClick}></div>;
+	return (
+		<div className="card" onClick={handleClick}>
+			{props.id}
+		</div>
+	);
 };
 
 export default Card;

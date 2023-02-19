@@ -3,35 +3,81 @@ import Card from './Card';
 import uniqid from 'uniqid';
 import Gameover from './Gameover';
 
-const Board = () => {
+const Board = function () {
 	const [level, setLevel] = useState(1);
 	const [gameover, setGameover] = useState(false);
+	const [cards, setCards] = useState([]);
+	const [clickedCardNum, setClickedCardNum] = useState(0);
 
-	const restartGame = () => {
+	useEffect(() => {
+		renderLevel();
+	}, []);
+
+	useEffect(() => {
+		if (clickedCardNum === returnNumberOfCards() && !gameover) {
+			incrementLevel();
+			setClickedCardNum(0);
+		}
+		shuffleCards();
+	}, [clickedCardNum]);
+
+	useEffect(() => {
+		if (level === 0) setLevel(1);
+		renderLevel();
+	}, [level]);
+
+	// setLevel(0) is needed so that if player loses at the first level the component is able to rerender
+	function restartGame() {
 		setGameover(false);
-	};
+		setLevel(0);
+		setClickedCardNum(0);
+	}
 
-	const enableGameover = () => {
+	function enableGameover() {
 		setGameover(true);
-	};
+	}
 
-	const renderLevel = () => {
+	function incrementClickedCardNum() {
+		setClickedCardNum((prev) => prev + 1);
+	}
+
+	function incrementLevel() {
+		setLevel((prev) => prev + 1);
+	}
+
+	function returnNumberOfCards() {
+		return 2 + 2 * level;
+	}
+
+	function shuffleCards() {
+		let copy = [...cards];
+		for (let i = copy.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			const temp = copy[i];
+			copy[i] = copy[j];
+			copy[j] = temp;
+		}
+		setCards(copy);
+	}
+
+	function renderLevel() {
 		let card = [];
-		for (let i = 0; i < 2 + 2 * level; i++) {
+		for (let i = 0; i < returnNumberOfCards(); i++) {
 			card.push(
 				<Card
 					key={uniqid()}
 					id={uniqid()}
 					enableGameover={enableGameover}
+					incrementClickedCardNum={incrementClickedCardNum}
 				/>
 			);
 		}
-		return card;
-	};
+		setCards(card);
+	}
 
 	return (
 		<div className="board">
-			{renderLevel()}
+			{cards}
 			{gameover && <Gameover restartGame={restartGame} />}
 		</div>
 	);

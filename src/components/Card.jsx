@@ -15,6 +15,7 @@ const Card = (props) => {
 		}
 		setClicked(true);
 		incrementScore();
+		props.incrementClickedCardNum();
 	};
 
 	return (

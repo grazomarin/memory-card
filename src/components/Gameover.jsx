@@ -5,7 +5,7 @@ const Gameover = (props) => {
 		<div className="background">
 			<div className="gameover">
 				<button className="restart" onClick={props.restartGame}>
-					Restart Game
+					Play Again
 				</button>
 			</div>
 		</div>

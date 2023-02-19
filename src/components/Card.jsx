@@ -19,9 +19,13 @@ const Card = (props) => {
 	};
 
 	return (
-		<div className="card" onClick={handleClick}>
-			{props.id}
-		</div>
+		<div
+			className="card"
+			onClick={handleClick}
+			style={{
+				backgroundColor: props.color,
+			}}
+		></div>
 	);
 };
 

@@ -60,6 +60,13 @@ const Board = function () {
 		setCards(copy);
 	}
 
+	function returnRandomColor() {
+		let r = Math.floor(Math.random() * 256);
+		let g = Math.floor(Math.random() * 256);
+		let b = Math.floor(Math.random() * 256);
+		return `rgb(${r}, ${g}, ${b})`;
+	}
+
 	function renderLevel() {
 		let card = [];
 		for (let i = 0; i < returnNumberOfCards(); i++) {
@@ -69,6 +76,7 @@ const Board = function () {
 					id={uniqid()}
 					enableGameover={enableGameover}
 					incrementClickedCardNum={incrementClickedCardNum}
+					color={returnRandomColor()}
 				/>
 			);
 		}

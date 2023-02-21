@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { useResetScore, useIncrementScore } from './ScoresContext';
+import { useSetScore } from './contexts/ScoresContext';
 
-const Card = (props) => {
+const Card = ({ rgb, ...props }) => {
 	const [clicked, setClicked] = useState(false);
-	const incrementScore = useIncrementScore();
-	const resetScore = useResetScore();
+	const setScore = useSetScore();
 
 	const handleClick = () => {
 		if (clicked === true) {
 			props.enableGameover();
 			setClicked(false);
-			resetScore();
 			return;
 		}
 		setClicked(true);
-		incrementScore();
+		setScore((prev) => prev + 1);
 		props.incrementClickedCardNum();
 	};
 
@@ -23,7 +21,8 @@ const Card = (props) => {
 			className="card"
 			onClick={handleClick}
 			style={{
-				backgroundColor: props.color,
+				backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
+				borderColor: `rgb(${rgb.r - 40}, ${rgb.g - 40}, ${rgb.b - 40})`,
 			}}
 		></div>
 	);

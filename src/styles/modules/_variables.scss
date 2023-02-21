@@ -6,3 +6,32 @@ $gap: 40px;
 $margin: 40px;
 $card-width: 220px;
 $card-height: 350px;
+
+@mixin rainbow($duration, $x-offset) {
+	animation: rainbow $duration infinite linear;
+	background: rgb(199, 21, 133);
+	background: linear-gradient(
+		90deg,
+		#c71585 3%,
+		#ff0000 10%,
+		#ff7f00 23%,
+		#ffff00 36%,
+		#00ff00 50%,
+		#0000ff 63%,
+		#4b0082 76%,
+		#9400d3 90%,
+		#c71585 97%
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	@keyframes rainbow {
+		0% {
+			background-position: 0 0;
+		}
+		100% {
+			background-position: $x-offset 0;
+		}
+	}
+}

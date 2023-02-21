@@ -22,18 +22,35 @@ body,
 #header {
 	position: relative;
 	display: flex;
-	background-color: rgb(160, 160, 160);
 	align-items: center;
 	justify-content: space-between;
+	background-color: rgb(160, 160, 160);
 	padding: $padding;
+	box-shadow: rgb(100, 100, 100) 0 3px 6px 1px;
+
+	.title {
+		&:hover {
+			@include rainbow(1.5s, 240px);
+			@media only screen and (max-width: 900px) {
+				@include rainbow(1s, 52px);
+			}
+		}
+	}
 
 	.logo {
 		width: 35px;
 		height: 35px;
 		justify-self: right;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
-	.score {
+	.status {
+		display: flex;
+		gap: 20px;
+
 		position: absolute;
 		right: 50%;
 		transform: translate(50%, 0);

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useSetScore } from './contexts/ScoresContext';
 import Card from './Card';
 import uniqid from 'uniqid';
 import Gameover from './Gameover';
+import { useLevel, useSetLevel } from './contexts/LevelContext';
+import { returnRandomRGB } from '../utils';
 
 const Board = function () {
-	const [level, setLevel] = useState(1);
+	const setScore = useSetScore();
+	const level = useLevel();
+	const setLevel = useSetLevel();
 	const [gameover, setGameover] = useState(false);
 	const [cards, setCards] = useState([]);
 	const [clickedCardNum, setClickedCardNum] = useState(0);
@@ -31,6 +36,7 @@ const Board = function () {
 		setGameover(false);
 		setLevel(0);
 		setClickedCardNum(0);
+		setScore(0);
 	}
 
 	function enableGameover() {
@@ -46,7 +52,7 @@ const Board = function () {
 	}
 
 	function returnNumberOfCards() {
-		return 2 + 2 * level;
+		return 2 + level;
 	}
 
 	function shuffleCards() {
@@ -60,13 +66,6 @@ const Board = function () {
 		setCards(copy);
 	}
 
-	function returnRandomColor() {
-		let r = Math.floor(Math.random() * 256);
-		let g = Math.floor(Math.random() * 256);
-		let b = Math.floor(Math.random() * 256);
-		return `rgb(${r}, ${g}, ${b})`;
-	}
-
 	function renderLevel() {
 		let card = [];
 		for (let i = 0; i < returnNumberOfCards(); i++) {
@@ -76,7 +75,7 @@ const Board = function () {
 					id={uniqid()}
 					enableGameover={enableGameover}
 					incrementClickedCardNum={incrementClickedCardNum}
-					color={returnRandomColor()}
+					rgb={returnRandomRGB()}
 				/>
 			);
 		}

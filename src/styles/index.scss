@@ -56,6 +56,34 @@ body,
 		transform: translate(50%, 0);
 		width: max-content;
 	}
+
+	@media only screen and (max-width: 500px) {
+		flex-flow: column;
+		padding: 0;
+		justify-content: center;
+		gap: 8px;
+
+		h3,
+		h2 {
+			font-weight: 700;
+		}
+
+		h3 {
+			font-size: 1.1rem;
+			letter-spacing: 1px;
+		}
+
+		.status {
+			position: relative;
+			right: 0;
+			transform: translate(0, 0);
+			font-size: 1rem;
+		}
+
+		.logo {
+			display: none;
+		}
+	}
 }
 
 .board {

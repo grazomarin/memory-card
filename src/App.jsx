@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Board from './components/Board';
 import Header from './components/Header';
 import { LevelProvider } from './components/contexts/LevelContext';
